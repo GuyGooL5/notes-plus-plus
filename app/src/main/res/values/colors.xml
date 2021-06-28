@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lightBlue_600">#039be5</color>
+    <color name="lightBlue_600_light">#63ccff</color>
+    <color name="lightBlue_600_dark">#006db3</color>
+    <color name="pink_900">#880e4f</color>
+    <color name="pink_900_light">#bc477b</color>
+    <color name="pink_900_dark">#560027</color>
+    <color name="grey_400">#bdbdbd</color>
+    <color name="grey_400_light">#efefef</color>
+    <color name="grey_400_dark">#8d8d8d</color>
+    <color name="critical">#D50000</color>
+    <color name="warning">#FF5722</color>
+    <color name="success">#00ea00</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>

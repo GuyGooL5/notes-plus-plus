@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">פתקים++</string>
+    <string name="main_placeholder_empty_list">להוספת רשומה חדשה לחץ על כפתור ה +.</string>
+    <string name="note_description">תיאור</string>
+    <string name="button_add">הוסף</string>
+    <string name="button_cancel">בטל</string>
+    <string name="button_done">בוצע</string>
+    <string name="button_ok">אוקיי</string>
+    <string name="accessibility_add_note">הוסף פתק</string>
+    <string name="button_save">שמור</string>
+    <string name="note_top_app_bar_title">פתק טקסט</string>
+    <string name="accessibility_more">עוד</string>
+    <string name="note_title_placeholder">ערוך להוספת כותרת</string>
+    <string name="dialog_note_edit_title">כותרת</string>
+</resources>

@@ -1,0 +1,28 @@
+<resources>
+
+    <!--    App-->
+    <string name="app_name">Notes++</string>
+
+    <!--    Main Activity-->
+    <string name="main_placeholder_empty_list">To add a new entry press the + button.</string>
+    <!--    Text Note Activity-->
+    <string name="note_top_app_bar_title">Text Note</string>
+    <string name="note_description">Description</string>
+
+    <!--    Buttons-->
+    <string name="button_add">Add</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_done">Done</string>
+    <string name="button_ok">OK</string>
+    <string name="button_save">Save</string>
+
+
+    <!--    Accessibility-->
+    <string name="accessibility_add_note">Add note</string>
+    <string name="accessibility_more">More</string>
+    <string name="note_title_placeholder">Edit to add title</string>
+    <string name="dialog_note_edit_title">Title</string>
+
+
+</resources>
+
