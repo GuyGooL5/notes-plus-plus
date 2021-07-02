@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="android.graphics.Color" />
+
         <variable
-            name="note"
+            name="noteModel"
             type="com.guygool5.notesplusplus.models.NoteModel" />
 
         <variable
@@ -13,7 +16,7 @@
             type="android.graphics.drawable.Drawable" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/new_note_layout_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,13 +24,11 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/new_text_note_top_app_bar_layout_id"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_anchorGravity="bottom">
 
             <com.google.android.material.appbar.MaterialToolbar
-
                 android:id="@+id/new_text_note_toolbar_id"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -37,31 +38,33 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_anchorGravity="bottom"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:orientation="vertical">
 
             <!--Title-->
             <LinearLayout
                 android:id="@+id/note_layout_title_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <!--Title Text-->
                 <com.google.android.material.textview.MaterialTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    isBold="@{!noteModel.title.isEmpty()}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    android:text="@{note.title.isEmpty()?@string/note_title_placeholder:note.title}" />
+                    android:singleLine="true"
+                    android:text="@{noteModel.title.isEmpty()?@string/note_title_placeholder:noteModel.title}"
+                    android:textColor="@{noteModel.title.isEmpty()?Color.GRAY:Color.BLACK}" />
                 <!--Title Edit Icon-->
                 <include
                     android:id="@+id/note_icon_button_edit_title_id"
@@ -71,18 +74,12 @@
 
             </LinearLayout>
 
-
-            <View
-                style="@style/Divider"
-                android:layout_below="@id/note_layout_title_id"
-                android:layout_marginHorizontal="8dp" />
-            <!--Description Input-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/new_note_layout_description_id"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/note_layout_title_id"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:hint="@string/note_description"
                 android:padding="8dp">
 
@@ -97,9 +94,6 @@
                 android:id="@+id/note_layout_button_group_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/new_note_layout_description_id"
-                android:gravity="center"
-
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
@@ -124,7 +118,7 @@
                     android:layout_margin="8dp"
                     android:text="@string/button_add" />
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

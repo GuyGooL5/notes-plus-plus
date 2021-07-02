@@ -12,5 +12,5 @@
     <string name="note_top_app_bar_title">פתק טקסט</string>
     <string name="accessibility_more">עוד</string>
     <string name="note_title_placeholder">ערוך להוספת כותרת</string>
-    <string name="dialog_note_edit_title">כותרת</string>
+    <string name="dialog_note_edit_title">ערוך כותרת</string>
 </resources>

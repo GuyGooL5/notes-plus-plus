@@ -1,6 +1,7 @@
 package com.guygool5.notesplusplus.utilities.logger;
 
 public enum LogType {
+    BINDING_ADAPTER,
     EXCEPTION,
     EXCEPTION_JSON,
     NOTE_TEXT,

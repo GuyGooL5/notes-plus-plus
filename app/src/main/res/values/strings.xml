@@ -21,7 +21,7 @@
     <string name="accessibility_add_note">Add note</string>
     <string name="accessibility_more">More</string>
     <string name="note_title_placeholder">Edit to add title</string>
-    <string name="dialog_note_edit_title">Title</string>
+    <string name="dialog_note_edit_title">Edit Title</string>
 
 
 </resources>
