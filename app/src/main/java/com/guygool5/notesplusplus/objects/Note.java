@@ -1,6 +1,8 @@
 package com.guygool5.notesplusplus.objects;
 
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -9,15 +11,16 @@ public class Note implements Serializable {
     private final String uuid;
 
     public Note() {
+
         this.uuid = UUID.randomUUID().toString();
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@Nullable String title) {
         this.title = title;
     }
 
+    @Nullable
     public String getTitle() {
-        if(title==null) return null;
         return title;
     }
 

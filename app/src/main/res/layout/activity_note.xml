@@ -12,7 +12,7 @@
             type="com.guygool5.notesplusplus.models.NoteModel" />
 
         <variable
-            name="icon"
+            name="editIcon"
             type="android.graphics.drawable.Drawable" />
     </data>
 
@@ -69,7 +69,7 @@
                 <include
                     android:id="@+id/note_icon_button_edit_title_id"
                     layout="@layout/material_icon_button_flat"
-                    app:icon="@{icon}" />
+                    app:icon="@{editIcon}" />
 
 
             </LinearLayout>

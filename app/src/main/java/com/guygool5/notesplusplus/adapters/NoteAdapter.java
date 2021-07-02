@@ -1,5 +1,7 @@
 package com.guygool5.notesplusplus.adapters;
 
+import androidx.annotation.Nullable;
+
 import com.guygool5.notesplusplus.models.NoteModel;
 import com.guygool5.notesplusplus.objects.Note;
 
@@ -23,7 +25,7 @@ public class NoteAdapter {
         return this.noteModel;
     }
 
-    public void setTitle(String title){
+    public void setTitle(@Nullable String title){
         note.setTitle(title);
         noteModel.setTitle(title);
     }

@@ -1,5 +1,6 @@
 package com.guygool5.notesplusplus.models;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
@@ -18,11 +19,12 @@ public class NoteModel extends BaseObservable {
         else setTitle(note.getTitle());
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@Nullable String title) {
         this.title = title;
         notifyPropertyChanged(BR.title);
     }
 
+    @Nullable
     @Bindable
     public String getTitle() {
         return title;
