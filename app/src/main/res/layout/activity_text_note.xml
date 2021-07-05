@@ -5,15 +5,13 @@
 
     <data>
 
-        <import type="android.graphics.Color" />
+        <variable
+            name="textNoteModel"
+            type="com.guygool5.notesplusplus.models.TextNoteModel" />
 
         <variable
-            name="noteModel"
-            type="com.guygool5.notesplusplus.models.NoteModel" />
-
-        <variable
-            name="editIcon"
-            type="android.graphics.drawable.Drawable" />
+            name="editIconButtonModel"
+            type="com.guygool5.notesplusplus.models.IconButtonModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -23,27 +21,27 @@
         tools:context=".activities.TextNoteActivity">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/new_text_note_top_app_bar_layout_id"
+            android:id="@+id/note_topAppBar_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_anchorGravity="bottom">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/new_text_note_toolbar_id"
+                android:id="@+id/note_toolbar_id"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/note_top_app_bar_menu"
+                app:menu="@menu/text_note_top_app_bar_menu"
                 app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                app:title="@string/note_top_app_bar_title" />
+                app:title="@string/text_note_top_app_bar_title" />
         </com.google.android.material.appbar.AppBarLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             app:layout_anchorGravity="bottom"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            android:orientation="vertical">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <!--Title-->
             <LinearLayout
@@ -55,21 +53,21 @@
 
                 <!--Title Text-->
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/note_text_title_id"
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    isBold="@{!noteModel.title.isEmpty()}"
+                    isBold="@{textNoteModel.title!=null &amp;&amp; !textNoteModel.title.isEmpty()}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="@{noteModel.title.isEmpty()?@string/note_title_placeholder:noteModel.title}"
-                    android:textColor="@{noteModel.title.isEmpty()?Color.GRAY:Color.BLACK}" />
+                    android:text="@{textNoteModel.title==null ||textNoteModel.title.isEmpty()?@string/text_note_title_placeholder:textNoteModel.title}" />
                 <!--Title Edit Icon-->
                 <include
                     android:id="@+id/note_icon_button_edit_title_id"
                     layout="@layout/material_icon_button_flat"
-                    app:icon="@{editIcon}" />
+                    app:iconButtonModel="@{editIconButtonModel}" />
 
 
             </LinearLayout>
@@ -80,13 +78,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:hint="@string/note_description"
+                android:hint="@string/text_note_description"
                 android:padding="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/new_text_note_description_edit_id"
+                    android:id="@+id/note_description_edit_id"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:text="@={textNoteModel.text}"
+                    android:gravity="top" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--    Buttons Container-->
@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="@string/button_add" />
+                    android:text="@string/button_save" />
             </LinearLayout>
         </LinearLayout>
 
