@@ -4,6 +4,9 @@
 
     <uses-feature android:name="android.hardware.camera2" android:required="true"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Notes">
-        <activity android:name=".activities.ImageNoteActivity"></activity>
+        <activity android:name=".activities.ImageNoteActivity" />
         <activity android:name=".activities.TextNoteActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>

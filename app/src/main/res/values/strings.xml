@@ -10,6 +10,8 @@
     <string name="text_note_description">Description</string>
     <string name="note_title_placeholder">Edit to add title</string>
 
+    <!--    Image Note Activity-->
+    <string name="image_note_snackbar_invalid_url">The Supplied URL is in invalid.</string>
     <!--    Buttons-->
     <string name="button_cancel">Cancel</string>
     <string name="button_no">No</string>
@@ -18,6 +20,8 @@
     <string name="button_yes">Yes</string>
     <string name="button_save">Save</string>
     <string name="button_add">Add</string>
+    <string name="button_take_picture">Take Picture</string>
+    <string name="button_load_url">Load URL</string>
 
 
     <!--    Text-->

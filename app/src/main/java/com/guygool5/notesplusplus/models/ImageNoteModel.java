@@ -7,11 +7,17 @@ import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
 
 import com.guygool5.notesplusplus.objects.notes.ImageNote;
+import com.guygool5.notesplusplus.utilities.logger.LogType;
+import com.guygool5.notesplusplus.utilities.logger.Logger;
 
 public class ImageNoteModel extends BaseObservable {
 
     private final ImageNote imageNote;
 
+
+    public ImageNoteModel() {
+        this(new ImageNote());
+    }
 
     public ImageNoteModel(ImageNote imageNote) {
         this.imageNote = imageNote;
@@ -25,10 +31,12 @@ public class ImageNoteModel extends BaseObservable {
 
     public void setBitmap(Bitmap bitmap) {
         this.imageNote.setBitmap(bitmap);
+        //TODO:delete this logger.
+        Logger.log(LogType.IMAGE_NOTE, "Trying to set bitmap to ImageNoteModel", bitmap);
         notifyPropertyChanged(BR.bitmap);
     }
 
-    public ImageNote getImageNote(){
+    public ImageNote getImageNote() {
         return imageNote;
     }
 

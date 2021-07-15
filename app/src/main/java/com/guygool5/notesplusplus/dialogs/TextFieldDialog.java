@@ -1,6 +1,7 @@
 package com.guygool5.notesplusplus.dialogs;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,21 +31,21 @@ public class TextFieldDialog {
      */
     @FunctionalInterface
     public interface OnSaveListener {
-        void onSave(String text);
+        void onSave(DialogInterface dialogInterface,String text);
     }
 
     /**
-     * This interface is to implement an {@link OnCloseListener#onClose()} that is invoked when the dialog is dismissed
+     * This interface is to implement an {@link OnCancelListener#onCancel()} that is invoked when the dialog is canceled
      */
     @FunctionalInterface
-    public interface OnCloseListener {
-        void onClose();
+    public interface OnCancelListener {
+        void onCancel();
     }
 
 
     private final MaterialAlertDialogBuilder textFieldDialogBuilder;
     private OnSaveListener onSaveListener = null;
-    private OnCloseListener onCloseListener = null;
+    private OnCancelListener onCancelListener = null;
 
     /**
      * Creates a TextFieldDialog that wraps {@link MaterialAlertDialogBuilder} with
@@ -57,7 +58,7 @@ public class TextFieldDialog {
         textFieldDialogBuilder = new MaterialAlertDialogBuilder(context);
         textFieldDialogBuilder.setNeutralButton(R.string.button_cancel, (d, i) -> {
             d.cancel();
-            if (onCloseListener != null) onCloseListener.onClose();
+            if (onCancelListener != null) onCancelListener.onCancel();
         });
     }
 
@@ -81,6 +82,9 @@ public class TextFieldDialog {
         return this;
     }
 
+    public void open(){
+        open(null);
+    }
     /**
      * This method will open the dialog and fill the title with a title
      * @param currentText This will fill the text field with a given text (Optional).
@@ -100,17 +104,14 @@ public class TextFieldDialog {
 
         //Finally we'll set an onClickListener of OK to update the title of the TextNoteAdapter and dismiss the dialog.
         textFieldDialogBuilder.setPositiveButton(R.string.button_ok, (dialogInterface, whichButton) -> {
-            Editable text = Objects.requireNonNull(dialogNoteEditTitleBinding).dialogNoteEditTitleEditTextId.getText();
-            String title = text != null ? text.toString() : null;
-            if (onSaveListener != null) onSaveListener.onSave(title);
-            dialogInterface.cancel();
-            if (onCloseListener != null) onCloseListener.onClose();
+            Editable editable = Objects.requireNonNull(dialogNoteEditTitleBinding).dialogNoteEditTitleEditTextId.getText();
+            String text = editable != null ? editable.toString() : null;
+            if (onSaveListener != null) onSaveListener.onSave(dialogInterface,text);
         });
 
         //After the preparations we'll show the dialog.
         textFieldDialogBuilder.show();
     }
-
 
     /**
      * This method will set an event listener that passes a {@link String} of the text field on save.
@@ -126,11 +127,11 @@ public class TextFieldDialog {
     /**
      * This method will set an event listener that is invoked on close.
      *
-     * @param onCloseListener The event listener to invoke on close.
+     * @param onCancelListener The event listener to invoke on close.
      * @return A self reference to the instance of this class.
      */
-    public TextFieldDialog  setOnCloseListener(@Nullable OnCloseListener onCloseListener) {
-        this.onCloseListener = onCloseListener;
+    public TextFieldDialog  setOnCloseListener(@Nullable OnCancelListener onCancelListener) {
+        this.onCancelListener = onCancelListener;
         return this;
     }
 

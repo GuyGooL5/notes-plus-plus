@@ -19,4 +19,7 @@
     <string name="text_note_delete_dialog_message">אי אפשר לבטל את זה. האם את/ה בטוח/ה שברצונך למחוק את הפתק?</string>
     <string name="text_more">עוד</string>
     <string name="image_note_top_app_bar_title">פתק תמונה</string>
+    <string name="button_take_picture">צלם תמונה</string>
+    <string name="button_load_url">טען מURL</string>
+    <string name="image_note_snackbar_invalid_url">כתובת הURL שהוזנה שגויה</string>
 </resources>

@@ -28,6 +28,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
+        binding.mainButtonNewImageNoteId.setOnClickListener(v->{
+
+        Intent intent = new Intent(this, ImageNoteActivity.class);
+        intent.putExtra("UUID","c7388cb9-09f2-475a-81cf-8fb5fe92acb4");
+        startActivity(intent);
+        });
+        binding.mainButtonNewTextNoteId.setOnClickListener(v->{
+
+        Intent intent = new Intent(this, TextNoteActivity.class);
+        intent.putExtra("UUID","c7388cb9-09f2-475a-81cf-8fb5fe92acb4");
+        startActivity(intent);
+        });
+
 //        TextNote textNote = new TextNote();
 //        textNote.setTitle("TextNote1");
 //        textNote.setText("TextNote1Text");
@@ -41,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Intent intent = new Intent(this, TextNoteActivity.class);
-        intent.putExtra("UUID","c7388cb9-09f2-475a-81cf-8fb5fe92acb4");
-        startActivity(intent);
 
     }
 

@@ -87,10 +87,13 @@ public class TextNoteActivity extends AppCompatActivity {
 
         TextFieldDialog editTitleDialog = new TextFieldDialog(this)
                 .setTitle(R.string.dialog_note_edit_title)
-                .setOnSaveListener(title ->textNoteModel.setTitle(title));
+                .setOnSaveListener((dialogInterface, title) -> {
+                    textNoteModel.setTitle(title);
+                    dialogInterface.cancel();
+                });
 
         IconButtonModel editIconButtonModel = new IconButtonModel(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_edit_24, null));
-        editIconButtonModel.setOnClickListener(v-> editTitleDialog.open(textNoteModel.getTitle()));
+        editIconButtonModel.setOnClickListener(v -> editTitleDialog.open(textNoteModel.getTitle()));
 
         binding.setEditIconButtonModel(editIconButtonModel);
     }

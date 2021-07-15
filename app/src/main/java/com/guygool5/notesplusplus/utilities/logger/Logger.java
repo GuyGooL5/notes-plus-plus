@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class Logger {
 
-    public static void log(LogType type, Object ...msg){
+    public static void log(LogType type, Object... msg){
         StringBuilder finalMessage= new StringBuilder();
         for(Object i: msg){
             try{
