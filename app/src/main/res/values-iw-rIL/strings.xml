@@ -11,11 +11,12 @@
     <string name="button_save">שמור</string>
     <string name="text_note_top_app_bar_title">פתק טקסט</string>
     <string name="text_delete">מחיקה</string>
-    <string name="text_note_title_placeholder">ערוך להוספת כותרת</string>
+    <string name="note_title_placeholder">ערוך להוספת כותרת</string>
     <string name="dialog_note_edit_title">ערוך כותרת</string>
     <string name="text_share">שיתוף</string>
     <string name="button_no">לא</string>
     <string name="button_yes">כן</string>
     <string name="text_note_delete_dialog_message">אי אפשר לבטל את זה. האם את/ה בטוח/ה שברצונך למחוק את הפתק?</string>
     <string name="text_more">עוד</string>
+    <string name="image_note_top_app_bar_title">פתק תמונה</string>
 </resources>

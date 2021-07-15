@@ -11,14 +11,15 @@ public class TextNote extends Note {
         super();
     }
 
+    public TextNote(String title) {
+        super(title);
+    }
+
     public TextNote(String title, String text) {
         this(title);
         setText(text);
     }
 
-    public TextNote(String title) {
-        super(title);
-    }
 
     @Override
     public NoteType getType() {

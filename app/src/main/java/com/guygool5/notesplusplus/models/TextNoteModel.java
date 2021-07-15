@@ -12,33 +12,36 @@ import com.guygool5.notesplusplus.objects.notes.TextNote;
 public class TextNoteModel extends BaseObservable {
 
 
-    private String title;
+    private final TextNote textNote;
 
-
-    private String text;
+    public TextNoteModel(){
+        this.textNote=new TextNote();
+    }
 
     public TextNoteModel(TextNote textNote) {
-        setTitle(textNote.getTitle());
-        setText(textNote.getText());
+        this.textNote = textNote;
     }
 
     public void setTitle(@Nullable String title) {
-        this.title = title;
+        textNote.setTitle(title);
         notifyPropertyChanged(BR.title);
     }
     public void setText(String text) {
-        this.text = text;
+        textNote.setText(text);
         notifyPropertyChanged(BR.text);
     }
 
-
-    @Nullable @Bindable
-    public String getTitle() {
-        return title;
+    public TextNote getTextNote(){
+        return textNote;
     }
 
     @Nullable @Bindable
-    public String getText() { return text; }
+    public String getTitle() {
+        return textNote.getTitle();
+    }
+
+    @Nullable @Bindable
+    public String getText() { return textNote.getText(); }
 
 
 

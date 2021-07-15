@@ -15,7 +15,7 @@ import java.util.UUID;
 public abstract class Note implements Serializable {
 
     //Every note should have a title.
-    private String title = null;
+    private String title;
 
     //Every note should have a unique *final* UUID.
     private final String uuid;

@@ -2,6 +2,9 @@ package com.guygool5.notesplusplus.handlers;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+import com.guygool5.notesplusplus.objects.notes.ImageNote;
 import com.guygool5.notesplusplus.objects.notes.Note;
 import com.guygool5.notesplusplus.objects.notes.NoteType;
 import com.guygool5.notesplusplus.objects.notes.TextNote;
@@ -19,43 +22,32 @@ import java.io.ObjectOutputStream;
 import static android.content.Context.MODE_PRIVATE;
 
 public class NoteFileHandler {
-    private static Object loadNoteGeneric(Context context,@NotNull String uuid ) throws ClassNotFoundException, IOException {
+    public static <T> T loadNote(Context context, @NotNull String uuid) throws ClassNotFoundException, IOException {
         try (FileInputStream inFile = context.openFileInput(uuid)) {
             try (ObjectInputStream inStream = new ObjectInputStream(inFile)) {
-                return inStream.readObject();
+                return (T)inStream.readObject();
             }
         }
     }
 
-    public static TextNote loadNote(Context context,@NotNull String uuid) throws IOException, ClassNotFoundException {
-        return (TextNote)loadNoteGeneric(context,uuid);
-    }
-
-    //TODO: Add loadImageNote.
-
-    private static <T extends Note> void saveNoteGeneric(Context context, T note) throws IOException {
-        try(FileOutputStream outFile = context.openFileOutput(note.getUuid(),MODE_PRIVATE)){
-            try(ObjectOutputStream outStream = new ObjectOutputStream(outFile)){
+    public static <T extends Note> void saveNote(Context context, T note) throws IOException {
+        try (FileOutputStream outFile = context.openFileOutput(note.getUuid(), MODE_PRIVATE)) {
+            try (ObjectOutputStream outStream = new ObjectOutputStream(outFile)) {
                 outStream.writeObject(note);
                 SharedPreferencesHandler sharedPreferencesHandler = new SharedPreferencesHandler(context);
-                sharedPreferencesHandler.addNoteUUID(note.getUuid(),note.getType());
+                sharedPreferencesHandler.addNoteUUID(note.getUuid(), note.getType());
             }
         }
     }
 
-    public static void saveNote(Context context,TextNote note) throws IOException {
-        NoteFileHandler.saveNoteGeneric(context,note);
-    }
-    //TODO: Add saveNote with ImageNote.
-
-    public static void deleteNote(  Context context,String uuid, NoteType type) {
+    public static void deleteNote(Context context, String uuid, NoteType type) {
         try {
             context.deleteFile(uuid);
-        }catch (Exception e){
-            Logger.log(LogType.NOTE_FILE,"Exception:",e.toString());
-        }finally {
-            SharedPreferencesHandler sharedPreferencesHandler= new SharedPreferencesHandler(context);
-            sharedPreferencesHandler.removeNoteUUID(uuid,type);
+        } catch (Exception e) {
+            Logger.log(LogType.NOTE_FILE, "Exception:", e.toString());
+        } finally {
+            SharedPreferencesHandler sharedPreferencesHandler = new SharedPreferencesHandler(context);
+            sharedPreferencesHandler.removeNoteUUID(uuid, type);
         }
     }
 
