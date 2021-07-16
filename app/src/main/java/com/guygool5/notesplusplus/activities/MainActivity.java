@@ -1,24 +1,20 @@
 package com.guygool5.notesplusplus.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
 import com.guygool5.notesplusplus.R;
 import com.guygool5.notesplusplus.databinding.ActivityMainBinding;
-import com.guygool5.notesplusplus.handlers.NoteFileHandler;
-import com.guygool5.notesplusplus.objects.notes.TextNote;
+import com.guygool5.notesplusplus.handlers.NoteManager;
+import com.guygool5.notesplusplus.objects.notes.Note;
+import com.guygool5.notesplusplus.objects.notes.NoteInfo;
 import com.guygool5.notesplusplus.utilities.logger.LogType;
 import com.guygool5.notesplusplus.utilities.logger.Logger;
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,19 +22,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        binding.mainButtonNewImageNoteId.setOnClickListener(v->{
+        try {
+            List<NoteInfo> noteInfoList = NoteManager.getInstance(this).getNoteInfoList();
+            for (NoteInfo i : noteInfoList) {
+                Logger.log(LogType.NOTE_FILE, i);
+            }
+        }catch (Exception e){
+            Logger.log(LogType.EXCEPTION,e);
+        }
 
-        Intent intent = new Intent(this, ImageNoteActivity.class);
-        intent.putExtra("UUID","c7388cb9-09f2-475a-81cf-8fb5fe92acb4");
-        startActivity(intent);
+        binding.mainButtonNewImageNoteId.setOnClickListener(v -> {
+
+            Intent intent = new Intent(this, ImageNoteActivity.class);
+            intent.putExtra("UUID", "c7388cb9-09f2-475a-81cf-8fb5fe92acb4");
+            startActivity(intent);
         });
-        binding.mainButtonNewTextNoteId.setOnClickListener(v->{
+        binding.mainButtonNewTextNoteId.setOnClickListener(v -> {
 
-        Intent intent = new Intent(this, TextNoteActivity.class);
-        intent.putExtra("UUID","c7388cb9-09f2-475a-81cf-8fb5fe92acb4");
-        startActivity(intent);
+            Intent intent = new Intent(this, TextNoteActivity.class);
+            intent.putExtra("UUID", "4d554db0-abc2-4ff1-acb8-9884c0b52761");
+            startActivity(intent);
         });
 
 //        TextNote textNote = new TextNote();
@@ -51,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
 //        } catch (IOException e) {
 //            Logger.log(LogType.NOTE_FILE,e.toString());
 //        }
-
-
 
 
     }

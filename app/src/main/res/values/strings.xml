@@ -5,6 +5,9 @@
 
     <!--    Main Activity-->
     <string name="main_placeholder_empty_list">To add a new entry press the + button.</string>
+
+    <!-- Note Activity (General)-->
+    <string name="note_snackbar_failed_to_load">Failed to open note, creating new.</string>
     <!--    Text Note Activity-->
     <string name="text_note_top_app_bar_title">Text Note</string>
     <string name="text_note_description">Description</string>

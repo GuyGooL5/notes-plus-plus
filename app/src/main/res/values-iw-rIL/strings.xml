@@ -22,4 +22,5 @@
     <string name="button_take_picture">צלם תמונה</string>
     <string name="button_load_url">טען מURL</string>
     <string name="image_note_snackbar_invalid_url">כתובת הURL שהוזנה שגויה</string>
+    <string name="note_snackbar_failed_to_load">שגיאה בפתיחת הפתק, יוצר חדש.</string>
 </resources>

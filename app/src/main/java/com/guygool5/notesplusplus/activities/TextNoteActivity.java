@@ -1,25 +1,25 @@
 package com.guygool5.notesplusplus.activities;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.databinding.DataBindingUtil;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.guygool5.notesplusplus.R;
 import com.guygool5.notesplusplus.databinding.ActivityTextNoteBinding;
 import com.guygool5.notesplusplus.dialogs.TextFieldDialog;
-import com.guygool5.notesplusplus.handlers.NoteFileHandler;
+import com.guygool5.notesplusplus.handlers.NoteManager;
 import com.guygool5.notesplusplus.models.IconButtonModel;
 import com.guygool5.notesplusplus.models.TextNoteModel;
-import com.guygool5.notesplusplus.objects.notes.NoteType;
 import com.guygool5.notesplusplus.utilities.logger.LogType;
 import com.guygool5.notesplusplus.utilities.logger.Logger;
 
@@ -35,15 +35,19 @@ public class TextNoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //IMPORTANT!!! Do not change the order of invocation!!!
 
-        //We'll use binding to create the activity to dynamically handle data.
         binding = DataBindingUtil.setContentView(this, R.layout.activity_text_note);
 
-        //First we'll try to get a UUID passed by the intent.
         String uuid = getIntent().getStringExtra("UUID");
-
         textNoteModel = initTextNoteModel(uuid);
+        binding.setTextNoteModel(textNoteModel);
+
+        binding.textNoteButtonCancelId.setOnClickListener((v) -> finish());
+        binding.textNoteButtonSaveId.setOnClickListener(v -> saveNote());
+
+        binding.textNoteDescriptionEditId.setText(textNoteModel.getTextNote().getText());
+        binding.textNoteDescriptionEditId.setFocusable(true);
+
 
         initEditTitleSection();
         initRootActivitySection();
@@ -53,32 +57,15 @@ public class TextNoteActivity extends AppCompatActivity {
 
     //This function will handle the loading/creation/error-handling of the TextNoteAdapter.
     private TextNoteModel initTextNoteModel(String uuid) {
-        //We'll see if a uuid was present on the intent, if not we will create a new TextNoteAdapter to handle the activity.
+        NoteManager noteManager = NoteManager.getInstance(this);
         if (uuid == null) return new TextNoteModel();
-
-        //Otherwise we'll try to load it from the disk.
         try {
-            //If we've successfully loaded the note we'll return it.
-            return new TextNoteModel(NoteFileHandler.loadNote(this, uuid));
-
-            //TODO: Delete this logger.
-            //Logger.log(LogType.NOTE_FILE, "Loaded TextNote:", textNoteAdapter.getTextNote().toString());
-
+            return new TextNoteModel(noteManager.loadNote(uuid));
         } catch (IOException | ClassNotFoundException e) {
-            //If the loading failed, we'll prompt to the screen an error message.
-            //TODO: Add StringRes.
-            Snackbar.make(binding.getRoot(), "Failed to load note. Creating new.", Snackbar.LENGTH_SHORT).show();
-
-            //It also means the UUID is somehow broken, we'll delete it.
-            //TODO: Try to handle IOException differently.
-            NoteFileHandler.deleteNote(this, uuid, NoteType.TEXT);
-
-            //TODO: Delete this logger.
-            //Logger.log(LogType.NOTE_FILE, "Failed to load TextNote:", uuid, "Exception:", e.toString());
-
-            //Then we will simply create a new TextNoteAdapter to handle the activity.
-            return new TextNoteModel();
-
+            Snackbar snackbar = Snackbar.make(binding.getRoot(),R.string.note_snackbar_failed_to_load, BaseTransientBottomBar.LENGTH_SHORT);
+            snackbar.setAction(R.string.button_ok,v-> snackbar.dismiss()).show();
+            noteManager.deleteNote(uuid);
+         return new TextNoteModel();
         }
     }
 
@@ -100,19 +87,6 @@ public class TextNoteActivity extends AppCompatActivity {
 
     //This part will initialize the logic for the layout of the activity generally.
     private void initRootActivitySection() {
-        //Now we'll set the TextNoteModel to the one the adapter handles.
-        binding.setTextNoteModel(textNoteModel);
-
-        //We'll also set the text of the note in the UI to the one in the adapter and then focus on it.
-        binding.textNoteDescriptionEditId.setText(textNoteModel.getTextNote().getText());
-        binding.textNoteDescriptionEditId.setFocusable(true);
-
-        //Finally we'll define how to handle the cancel and save buttons.
-        //Cancel simply finishes the activity without changes.
-        binding.textNoteButtonCancelId.setOnClickListener((v) -> finish());
-
-        //The save button will call the saveNote() method.
-        binding.textNoteButtonSaveId.setOnClickListener(v -> saveNote(binding.getRoot()));
 
 
     }
@@ -156,7 +130,7 @@ public class TextNoteActivity extends AppCompatActivity {
             deleteConfirmationDialogBuilder.setMessage("This cannot be undone, are you sure you want to delete the note?");
             deleteConfirmationDialogBuilder.setNegativeButton(R.string.button_no, ((dialog, which) -> dialog.cancel()));
             deleteConfirmationDialogBuilder.setPositiveButton(R.string.button_yes, ((dialog, which) -> {
-                NoteFileHandler.deleteNote(this, textNoteModel.getTextNote().getUuid(), textNoteModel.getTextNote().getType());
+                NoteManager.getInstance(this).deleteNote(textNoteModel.getTextNote().getUuid());
                 finish();
             }));
             deleteConfirmationDialogBuilder.show();
@@ -165,17 +139,13 @@ public class TextNoteActivity extends AppCompatActivity {
     }
 
     //This method will try to save the note and if it fails it will prompt to the rootView a Snackbar with a 'try again' button that calls the function itself.
-    private void saveNote(View rootView) {
+    private void saveNote() {
         try {
-            //If the save is successful we'll close the activity.
-            NoteFileHandler.saveNote(this, textNoteModel.getTextNote());
-            Logger.log(LogType.NOTE_FILE, "Saved ", textNoteModel.getTextNote().toString());
+            NoteManager.getInstance(this).saveNote(textNoteModel.getTextNote());
             finish();
         } catch (IOException e) {
-            //Otherwise we will prompt a Snackbar to try again. it will call this function recursively.
             //TODO: Add StringRes.
-            Snackbar.make(rootView, "Failed to save note", Snackbar.LENGTH_SHORT).setAction("Try Again", v -> saveNote(rootView)).show();
-            Logger.log(LogType.NOTE_FILE, "Failed to save", textNoteModel.getTextNote().toString(), "Exception:", e.toString());
+            Snackbar.make(binding.getRoot(), "Failed to save note", Snackbar.LENGTH_SHORT).setAction("Try Again", v -> saveNote()).show();
         }
 
     }

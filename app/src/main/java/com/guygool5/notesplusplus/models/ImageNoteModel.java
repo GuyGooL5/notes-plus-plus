@@ -31,8 +31,6 @@ public class ImageNoteModel extends BaseObservable {
 
     public void setBitmap(Bitmap bitmap) {
         this.imageNote.setBitmap(bitmap);
-        //TODO:delete this logger.
-        Logger.log(LogType.IMAGE_NOTE, "Trying to set bitmap to ImageNoteModel", bitmap);
         notifyPropertyChanged(BR.bitmap);
     }
 
