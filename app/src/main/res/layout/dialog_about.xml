@@ -15,24 +15,60 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
 
         <TextView
+            android:id="@+id/dialog_about_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:autoLink="email"
+            android:textColor="@color/lightBlue_600_dark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:text="@string/author_email" />
 
         <TextView
+            android:id="@+id/dialog_about_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:autoLink="phone"
+            android:textColor="@color/lightBlue_600_dark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:text="@string/author_phone" />
 
         <TextView
+            android:id="@+id/dialog_about_github"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:autoLink="web"
+            android:textColor="@color/lightBlue_600_dark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:text="@string/author_github" />
+
+        <TextView
+            android:id="@+id/dialog_about_calendar_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="@color/lightBlue_600_dark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:text="@string/dialog_about_calendar_reminder"
+            />
+
+        <TextView
+            android:id="@+id/dialog_about_alarm_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="@color/lightBlue_600_dark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:text="@string/dialog_about_alarm_reminder"
+            />
+        <TextView
+            android:id="@+id/dialog_about_web_search_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="@color/lightBlue_600_dark"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:text="@string/dialog_about_web_search"
+            />
+
     </LinearLayout>
 </layout>

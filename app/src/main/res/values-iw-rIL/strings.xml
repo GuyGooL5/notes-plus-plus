@@ -28,4 +28,7 @@
     <string name="snackbar_failed_to_save_note">שגיאה בעת שמירת פתק.</string>
     <string name="snackbar_button_try_again">נסה שוב</string>
     <string name="snackbar_error_no_share">לא נמצאה אפליקציה שיכולה לפתוח את זה</string>
+    <string name="dialog_about_calendar_reminder">תתקשרו אליי בעוד שבוע</string>
+    <string name="dialog_about_alarm_reminder">תתקשרו אליי בעוד שעה</string>
+    <string name="dialog_about_web_search">חפשו אותי באינטרנט</string>
 </resources>

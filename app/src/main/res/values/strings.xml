@@ -47,6 +47,9 @@
     <string name="image_note_top_app_bar_title">Image Note</string>
     <string name="snackbar_button_try_again">Try Again</string>
     <string name="snackbar_error_no_share">Found no app that can open this</string>
+    <string name="dialog_about_calendar_reminder">Call me in a week</string>
+    <string name="dialog_about_alarm_reminder">Call me in an hour</string>
+    <string name="dialog_about_web_search">Find me on the internet</string>
 
 
 </resources>
