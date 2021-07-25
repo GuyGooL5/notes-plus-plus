@@ -21,21 +21,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_anchorGravity="bottom"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/main_button_new_text_note_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New TextNote" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/main_button_new_image_note_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New ImageNote" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_recycler_view_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
         </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/main_fab_add_note_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:elevation="4dp"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:contentDescription="TODO" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.guygool5.notesplusplus.objects.notes.NoteInfo" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/note_info_item_title_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{model.title}" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/note_info_item_uuid_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{model.uuid}" />
+
+        <View
+            style="@style/Divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp" />
+    </LinearLayout>
+</layout>
