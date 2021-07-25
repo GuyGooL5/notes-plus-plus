@@ -7,6 +7,7 @@ import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
 
 import com.guygool5.notesplusplus.objects.notes.ImageNote;
+import com.guygool5.notesplusplus.utilities.BitmapDataObject;
 import com.guygool5.notesplusplus.utilities.logger.LogType;
 import com.guygool5.notesplusplus.utilities.logger.Logger;
 
@@ -29,7 +30,7 @@ public class ImageNoteModel extends BaseObservable {
         notifyPropertyChanged(BR.title);
     }
 
-    public void setBitmap(Bitmap bitmap) {
+    public void setBitmap(BitmapDataObject bitmap) {
         this.imageNote.setBitmap(bitmap);
         notifyPropertyChanged(BR.bitmap);
     }
@@ -44,7 +45,7 @@ public class ImageNoteModel extends BaseObservable {
     }
 
     @Bindable
-    public Bitmap getBitmap() {
+    public BitmapDataObject getBitmap() {
         return imageNote.getBitmap();
     }
 

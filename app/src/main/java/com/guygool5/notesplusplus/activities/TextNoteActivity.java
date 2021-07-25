@@ -115,8 +115,7 @@ public class TextNoteActivity extends AppCompatActivity {
                 startActivity(intent);
             } catch (Exception e) {
                 //If we fail to start it, it means no app can receive the data. We'll prompt in a Snackbar the error.
-                //TODO: Add StringRes.
-                Snackbar.make(binding.getRoot(), "Found no app we can share this with.", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(binding.getRoot(), R.string.snackbar_error_no_share, Snackbar.LENGTH_SHORT).show();
             }
             return false;
         });
@@ -144,8 +143,8 @@ public class TextNoteActivity extends AppCompatActivity {
             NoteManager.getInstance(this).saveNote(textNoteModel.getTextNote());
             finish();
         } catch (IOException e) {
-            //TODO: Add StringRes.
-            Snackbar.make(binding.getRoot(), "Failed to save note", Snackbar.LENGTH_SHORT).setAction("Try Again", v -> saveNote()).show();
+            Snackbar.make(binding.getRoot(), R.string.snackbar_failed_to_save_note, Snackbar.LENGTH_SHORT)
+                    .setAction(R.string.snackbar_button_try_again, v -> saveNote()).show();
         }
 
     }

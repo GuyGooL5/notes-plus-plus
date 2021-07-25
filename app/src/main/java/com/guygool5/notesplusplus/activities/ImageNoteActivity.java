@@ -25,6 +25,7 @@ import com.guygool5.notesplusplus.dialogs.TextFieldDialog;
 import com.guygool5.notesplusplus.handlers.NoteManager;
 import com.guygool5.notesplusplus.models.IconButtonModel;
 import com.guygool5.notesplusplus.models.ImageNoteModel;
+import com.guygool5.notesplusplus.utilities.BitmapDataObject;
 import com.guygool5.notesplusplus.utilities.logger.LogType;
 import com.guygool5.notesplusplus.utilities.logger.Logger;
 
@@ -62,7 +63,7 @@ public class ImageNoteActivity extends AppCompatActivity {
             if (result.getResultCode() == RESULT_OK) {
                 Intent data = result.getData();
                 if (data != null) {
-                    Bitmap image = (Bitmap) data.getExtras().get("data");
+                    BitmapDataObject image = new BitmapDataObject((Bitmap) data.getExtras().get("data"));
                     imageNoteModel.setBitmap(image);
                 }
             }
@@ -115,9 +116,9 @@ public class ImageNoteActivity extends AppCompatActivity {
                 }
                 return null;
             });
-            Bitmap image = null;
+            BitmapDataObject image = null;
             try {
-                image = futureImage.get();
+                image = new BitmapDataObject(futureImage.get());
             } catch (ExecutionException | InterruptedException e) {
                 Snackbar.make(binding.getRoot(), "Failed to load image", Snackbar.LENGTH_SHORT).show();
             }
@@ -130,9 +131,8 @@ public class ImageNoteActivity extends AppCompatActivity {
         });
 
         binding.imageNoteButtonTakePictureId.setOnClickListener(v -> takePictureLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE)));
-        //TODO: Delete this.
-        binding.imageNoteButtonLoadUrl.setOnClickListener(v -> loadUrlDialog.open("https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=8"));
-        //binding.imageNoteButtonLoadUrl.setOnClickListener(v -> loadUrlDialog.open());
+
+        binding.imageNoteButtonLoadUrl.setOnClickListener(v -> loadUrlDialog.open());
     }
 
     private void saveNote() {
@@ -140,8 +140,9 @@ public class ImageNoteActivity extends AppCompatActivity {
             NoteManager.getInstance(this).saveNote(imageNoteModel.getImageNote());
             finish();
         } catch (IOException e) {
-            //TODO: Add StringRes.
-            Snackbar.make(binding.getRoot(), "Failed to save note", Snackbar.LENGTH_SHORT).setAction("Try Again", v -> saveNote()).show();
+            Logger.log(LogType.DEBUG, e);
+            Snackbar.make(binding.getRoot(), R.string.snackbar_failed_to_save_note, Snackbar.LENGTH_SHORT)
+                    .setAction(R.string.snackbar_button_try_again, v -> saveNote()).show();
         }
 
     }
@@ -154,7 +155,7 @@ public class ImageNoteActivity extends AppCompatActivity {
 
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.putExtra(Intent.EXTRA_TEXT, imageNoteModel.getTitle());
-            String uri = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageNoteModel.getBitmap(), "Image", "Sent by Notes++");
+            String uri = MediaStore.Images.Media.insertImage(this.getContentResolver(), imageNoteModel.getBitmap().getCurrentImage(), "Image", "Sent by Notes++");
             intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri));
             intent.setType("image/*");
             startActivity(Intent.createChooser(intent, "Share Image Note"));

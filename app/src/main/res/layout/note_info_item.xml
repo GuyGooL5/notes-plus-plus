@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -9,22 +9,31 @@
             type="com.guygool5.notesplusplus.objects.notes.NoteInfo" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginHorizontal="16dp"
         android:orientation="vertical">
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/note_info_item_title_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.title}" />
+            android:drawablePadding="8dp"
+            noteType="@{model.noteType}"
+            android:maxLines="1"
+            android:text="@{model.title}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/note_info_item_uuid_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{model.uuid}" />
+            android:text="@{model.uuid}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
         <View
             style="@style/Divider"

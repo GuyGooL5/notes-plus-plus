@@ -2,6 +2,7 @@ package com.guygool5.notesplusplus.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -22,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,31 +41,14 @@ public class MainActivity extends AppCompatActivity {
             alertDialogBuilder.show();
         });
 
-//        binding.mainButtonNewImageNoteId.setOnClickListener(v -> {
-//
-//            Intent intent = new Intent(this, ImageNoteActivity.class);
-//            intent.putExtra("UUID", "c7388cb9-09f2-475a-81cf-8fb5fe92acb4");
-//            startActivity(intent);
-//        });
-//        binding.mainButtonNewTextNoteId.setOnClickListener(v -> {
-//
-//            Intent intent = new Intent(this, TextNoteActivity.class);
-//            intent.putExtra("UUID", "4d554db0-abc2-4ff1-acb8-9884c0b52761");
-//            startActivity(intent);
-//        });
+        binding.noteToolbarId.getMenu().findItem(R.id.main_menu_about_id).setOnMenuItemClickListener(v -> {
 
-//        TextNote textNote = new TextNote();
-//        textNote.setTitle("TextNote1");
-//        textNote.setText("TextNote1Text");
-//        try {
-//            Logger.log(LogType.NOTE_FILE,"Trying to save TextNote:",textNote.toString());
-//            NoteFileHandler.saveNote(this,textNote);
-//            Logger.log(LogType.NOTE_FILE,"Saved TextNote:",textNote.toString());
-//        } catch (IOException e) {
-//            Logger.log(LogType.NOTE_FILE,e.toString());
-//        }
-
-
+            MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this);
+            dialogBuilder.setTitle(R.string.text_about);
+            dialogBuilder.setView(LayoutInflater.from(this).inflate(R.layout.dialog_about, null, false));
+            dialogBuilder.show();
+            return false;
+        });
     }
 
     @Override
@@ -72,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         updateRecycler();
     }
 
-    private void updateRecycler(){
+    private void updateRecycler() {
         binding.mainRecyclerViewId.setAdapter(new NoteAdapter(NoteManager.getInstance(this).getNoteInfoList()));
 
     }

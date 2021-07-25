@@ -1,11 +1,13 @@
 package com.guygool5.notesplusplus.adapters;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import com.guygool5.notesplusplus.activities.ImageNoteActivity;
 import com.guygool5.notesplusplus.activities.TextNoteActivity;
 import com.guygool5.notesplusplus.databinding.NoteInfoItemBinding;
 import com.guygool5.notesplusplus.objects.notes.NoteInfo;
+import com.guygool5.notesplusplus.objects.notes.NoteType;
 import com.guygool5.notesplusplus.objects.notes.TextNote;
 
 import java.util.List;
@@ -24,7 +27,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         NoteInfoItemBinding binding;
-
         public ViewHolder(View view) {
             super(view);
             binding = DataBindingUtil.bind(view);
@@ -46,6 +48,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 v.getContext().startActivity(intent);
             });
         }
+
     }
 
     public NoteAdapter(List<NoteInfo> noteInfo) {
@@ -62,6 +65,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.binding.setModel(noteInfo.get(position));
+
     }
 
     @Override

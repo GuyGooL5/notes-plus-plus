@@ -30,6 +30,14 @@
     <!--    Text-->
     <string name="text_more">More</string>
     <string name="text_share">Share</string>
+    <string name="text_about">About</string>
+    <string name="author_description">Created by Guy Tsitsiashvili</string>
+    <string name="author_email" translatable="false">guygool4@gmail.com</string>
+    <string name="author_phone" translatable="false">0546942199</string>
+    <string name="author_github" translatable="false">https://github.com/guygool5</string>
+
+
+    <string name="snackbar_failed_to_save_note">Failed to save note.</string>
 
     <!--    Accessibility-->
     <string name="accessibility_add_note">Add note</string>
@@ -37,6 +45,8 @@
     <string name="text_note_delete_dialog_message">This cannot be undone. Are you sure you want to delete this note?</string>
     <string name="text_delete">Delete</string>
     <string name="image_note_top_app_bar_title">Image Note</string>
+    <string name="snackbar_button_try_again">Try Again</string>
+    <string name="snackbar_error_no_share">Found no app that can open this</string>
 
 
 </resources>

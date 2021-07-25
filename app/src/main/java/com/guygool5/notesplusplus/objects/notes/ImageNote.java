@@ -2,29 +2,31 @@ package com.guygool5.notesplusplus.objects.notes;
 
 import android.graphics.Bitmap;
 
+import com.guygool5.notesplusplus.utilities.BitmapDataObject;
+
 //This is an ImageNote class. It inherits from Note and has an additional Image field.
 public class ImageNote extends Note {
 
 
     //This will be the image of the note.
-    private Bitmap bitmap;
+    private BitmapDataObject bitmap;
 
     //Basic constructors.
     public ImageNote(){super();}
 
     public ImageNote(String title){ super(title);}
 
-    public ImageNote(String title, Bitmap imageUri){
+    public ImageNote(String title, BitmapDataObject bitmap){
         this(title);
-        setBitmap(imageUri);
+        setBitmap(bitmap);
     }
 
 
-    public Bitmap getBitmap() {
+    public BitmapDataObject getBitmap() {
         return bitmap;
     }
 
-    public void setBitmap(Bitmap bitmap) {
+    public void setBitmap(BitmapDataObject bitmap) {
         this.bitmap = bitmap;
         updateModified();
     }
@@ -35,11 +37,4 @@ public class ImageNote extends Note {
         return NoteType.IMAGE;
     }
 
-    //TODO: try to make sense of this.
-    @Override
-    public String toString() {
-        return "ImageNote{" +
-                "image=" + bitmap.toString() +
-                "} " + super.toString();
-    }
 }
